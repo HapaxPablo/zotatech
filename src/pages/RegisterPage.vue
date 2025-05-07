@@ -15,4 +15,10 @@ import RegisterForm from '@/features/auth/RegisterForm.vue'
   min-height: 100vh;
   background-color: #f5f5f5;
 }
+
+@media (max-width: 600px) {
+  .wrapper {
+    background-color: #fffffe;
+  }
+}
 </style>
