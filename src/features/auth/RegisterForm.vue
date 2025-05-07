@@ -29,10 +29,12 @@
       />
     </div>
     <div class="h-[50px]">
+      <!-- кнопка неактивна пока не заполнен логин -->
       <CustomButton
         text="Зарегистрироваться"
         type="submit"
         className="bg-[#2B2A29] text-white w-full h-full"
+        :disabled="!form.login" 
       />
     </div>
 
@@ -68,17 +70,33 @@ const form = ref<IRegisterUser & { confirmPassword: string }>({
 
 const errors = ref<Partial<Record<keyof typeof form.value, string>>>({})
 
-// Простая валидация
+const validationRules = {
+  login: [
+    { validate: (value: string) => !!value, message: 'Логин обязателен' },
+    { validate: (value: string) => value.length >= 6, message: 'Логин должен быть не менее 6 символов' }
+  ],
+  password: [
+    { validate: (value: string) => !!value, message: 'Пароль обязателен' }
+  ],
+  confirmPassword: [
+    { validate: (value: string) => !!value, message: 'Подтвердите пароль' },
+    { validate: (value: string) => value === form.value.password, message: 'Пароли не совпадают' }
+  ]
+}
+
 const validate = () => {
   errors.value = {}
 
-  if (!form.value.login) errors.value.login = 'Логин обязателен'
-  if (!form.value.password) errors.value.password = 'Пароль обязателен'
-  if (!form.value.confirmPassword) errors.value.confirmPassword = 'Подтвердите пароль'
-  if (form.value.password !== form.value.confirmPassword)
-    errors.value.confirmPassword = 'Пароли не совпадают'
-
-  // Можно добавить email и phone по необходимости
+  Object.entries(validationRules).forEach(([field, rules]) => {
+    const value = form.value[field as keyof typeof form.value]
+    
+    for (const rule of rules) {
+      if (!rule.validate(value as string)) {
+        errors.value[field as keyof typeof errors.value] = rule.message
+        break
+      }
+    }
+  })
 
   return Object.keys(errors.value).length === 0
 }
