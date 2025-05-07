@@ -1,13 +1,6 @@
-<template lang="">
-  <div>Привет, {{ user?.login }}</div>
-</template>
 <script setup lang="ts">
-import { useUserStore } from '@/entities/user/model/userStore'
-
-const userStore = useUserStore()
-const user = userStore.user
-console.log(user)
+import GreetingsUser from '@/features/profile/GreetingsUser.vue'
 </script>
-<!-- <style lang=""></style>
-    
-</style> -->
+<template>
+  <GreetingsUser />
+</template>
