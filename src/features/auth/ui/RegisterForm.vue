@@ -49,64 +49,14 @@
 </template>
 
 <script setup lang="ts">
-import type { IRegisterUser } from '@/entities/user/model/type'
-import { useUserStore } from '@/entities/user/model/userStore'
 import CustomButton from '@/shared/ui/Button/CustomButton.vue'
 import CustomInput from '@/shared/ui/Input/CustomInput.vue'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useAuth } from '../model/useAuth'
 
-const router = useRouter()
-const userStore = useUserStore()
-
-// форма + confirmPassword отдельно
-const form = ref<IRegisterUser & { confirmPassword: string }>({
-  login: '',
-  password: '',
-  confirmPassword: '',
-  email: '',
-  phone: '',
-})
-
-const errors = ref<Partial<Record<keyof typeof form.value, string>>>({})
-
-const validationRules = {
-  login: [
-    { validate: (value: string) => !!value, message: 'Логин обязателен' },
-    { validate: (value: string) => value.length >= 6, message: 'Логин должен быть не менее 6 символов' }
-  ],
-  password: [
-    { validate: (value: string) => !!value, message: 'Пароль обязателен' }
-  ],
-  confirmPassword: [
-    { validate: (value: string) => !!value, message: 'Подтвердите пароль' },
-    { validate: (value: string) => value === form.value.password, message: 'Пароли не совпадают' }
-  ]
-}
-
-const validate = () => {
-  errors.value = {}
-
-  Object.entries(validationRules).forEach(([field, rules]) => {
-    const value = form.value[field as keyof typeof form.value]
-    
-    for (const rule of rules) {
-      if (!rule.validate(value as string)) {
-        errors.value[field as keyof typeof errors.value] = rule.message
-        break
-      }
-    }
-  })
-
-  return Object.keys(errors.value).length === 0
-}
+const { form, errors, register } = useAuth()
 
 const onSubmit = () => {
-  if (!validate()) return
-
-  userStore.register({ login: form.value.login })
-
-  router.push('/profile')
+  register()
 }
 </script>
 
@@ -127,7 +77,5 @@ const onSubmit = () => {
   gap: 20px;
 }
 
-.border-t {
-  border-top: 1px solid #ccc;
-}
+
 </style>
