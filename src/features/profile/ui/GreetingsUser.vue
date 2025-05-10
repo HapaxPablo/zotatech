@@ -17,72 +17,57 @@ const { user, logout } = useProfile()
 
 <style scoped>
     .greetings-wrapper {
-        /* CSS переменные для легкой кастомизации */
-        --container-max-width-desktop: 702px;
-        --container-max-height-desktop: 219px;
-        --container-max-width-mobile: 288px;
-        --container-max-height-mobile: 72px;
-        --container-padding: 42px;
-        --container-gap: 20px;
-        --container-margin-top: 120px;
-        --container-bg-color: #FFFFFE;
+        --wrapper-max-width: 702px;
+        --wrapper-max-height: 219px;
+        --wrapper-padding: 42px;
+        --wrapper-gap: 16px;
+        --wrapper-margin-top: 120px;
+        --wrapper-mobile-margin: 24px 16px;
+        --wrapper-mobile-max-width: 288px;
+        --wrapper-mobile-max-height: 123px;
+        --wrapper-mobile-gap: 12px;
 
-        /* Layout */
+        max-width: var(--wrapper-max-width);
+        width: 100%;
+        max-height: var(--wrapper-max-height);
+        height: 100%;
+        background-color: #FFFFFE;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        
-        /* Spacing */
-        margin-top: var(--container-margin-top);
-        gap: var(--container-gap);
-        padding: var(--container-padding);
-        
-        /* Sizing */
-        width: clamp(300px, 100%, var(--container-max-width-desktop));
-        min-height: 100px;
-        max-height: var(--container-max-height-desktop);
-        height: 100%;
-        
-        /* Visual */
-        background-color: var(--container-bg-color);
-        
-        /* Responsive */
+        padding: var(--wrapper-padding);
+        gap: var(--wrapper-gap);
+        margin-top: var(--wrapper-margin-top);
+
         @media (max-width: 768px) {
-            --container-padding: 16px;
-            --container-margin-top: 24px;
-            --container-gap: 16px;
-            --container-max-width-desktop: var(--container-max-width-mobile);
-            --container-max-height-desktop: var(--container-max-height-mobile);
+            margin: var(--wrapper-mobile-margin);
+            padding: 0;
+            gap: var(--wrapper-mobile-gap);
+            max-width: var(--wrapper-mobile-max-width);
+            max-height: var(--wrapper-mobile-max-height);
         }
     }
     .greetings-text {
-        /* CSS переменные для текста */
         --text-size: 40px;
         --text-line-height: 52px;
         --text-color: #000000;
         --text-weight: 500;
+        --text-mobile-size: 24px;
+        --text-mobile-line-height: 32px;
 
-        /* Typography */
         font-size: var(--text-size);
         font-weight: var(--text-weight);
         color: var(--text-color);
         line-height: var(--text-line-height);
         
-        /* Responsive */
         @media (max-width: 768px) {
-            --text-size: 32px;
-            --text-line-height: 42px;
-        }
-        
-        @media (max-width: 480px) {
-            --text-size: 24px;
-            --text-line-height: 32px;
+            --text-size: var(--text-mobile-size);
+            --text-line-height: var(--text-mobile-line-height);
         }
     }
 
     .logout-button {
-
         --button-text-size: 16px;   
         --button-text-line-height: 26px;
         --button-text-color: #2B2A29;

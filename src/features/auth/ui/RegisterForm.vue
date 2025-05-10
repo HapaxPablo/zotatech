@@ -28,19 +28,18 @@
         :error="errors.confirmPassword"
       />
     </div>
-    <div class="h-[50px]">
-      <!-- кнопка неактивна пока не заполнен логин -->
+    <div class="button-container">
       <CustomButton
         text="Зарегистрироваться"
         type="submit"
-        className="bg-[#2B2A29] text-white w-full h-full"
+        className="bg-[var(--color-button-bg)] text-white w-full h-full"
         :disabled="!form.login" 
       />
     </div>
 
     <div class="flex flex-col gap-6">
       <div class="border-t" />
-      <span class="font-normal text-[14px] leading-[18px] text-[#878787]">
+      <span class="agreement-text">
         Нажимая кнопку «Зарегистрироваться», пользователь соглашается с политикой в отношении
         обработки персональных данных и публичной офертой
       </span>
@@ -62,20 +61,29 @@ const onSubmit = () => {
 
 <style scoped>
 .register-form {
-  padding: 42px;
+  padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
-  max-width: 614px;
+  max-width: var(--container-form);
   width: 100%;
-  background-color: #fffffe;
-  gap: 24px;
+  background-color: var(--color-white);
+  gap: var(--spacing-lg);
 }
 
 .form-fields {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-md);
 }
 
+.button-container {
+  height: var(--button-height);
+}
 
+.agreement-text {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  color: var(--color-text-secondary);
+}
 </style>

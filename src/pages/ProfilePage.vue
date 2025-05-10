@@ -16,7 +16,7 @@ import GreetingsUser from '@/features/profile/ui/GreetingsUser.vue'
   background-color: #f1f1f1;
   
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .wrapper {
     background-color: #fffffe;
   }

@@ -31,6 +31,16 @@ export const useAuth = () => {
     confirmPassword: [
       { validate: (value: string) => !!value, message: 'Подтвердите пароль' },
       { validate: (value: string) => value === form.value.password, message: 'Пароли не совпадают' }
+    ],
+    phone: [
+      { validate: (value: string) => !!value, message: 'Телефон обязателен' },
+      { 
+        validate: (value: string) => {
+          const digits = value.replace(/\D/g, '');
+          return digits.length === 11;
+        }, 
+        message: 'Введите корректный номер телефона' 
+      }
     ]
   }
 
