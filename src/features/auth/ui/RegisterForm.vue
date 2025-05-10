@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit" class="register-form">
-    <div class="text-2xl font-bold">Регистрация</div>
+    <div class="form-title">Регистрация</div>
     <div class="form-fields">
       <CustomInput v-model="form.login" label="Логин *" type="text" :error="errors.login" />
 
@@ -32,12 +32,12 @@
       <CustomButton
         text="Зарегистрироваться"
         type="submit"
-        className="bg-[var(--color-button-bg)] text-white w-full h-full"
+        className="submit-button"
         :disabled="!form.login" 
       />
     </div>
 
-    <div class="flex flex-col gap-6">
+    <div class="agreement-container">
       <div class="border-t" />
       <span class="agreement-text">
         Нажимая кнопку «Зарегистрироваться», пользователь соглашается с политикой в отношении
@@ -70,6 +70,11 @@ const onSubmit = () => {
   gap: var(--spacing-lg);
 }
 
+.form-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
 .form-fields {
   display: flex;
   flex-direction: column;
@@ -78,6 +83,26 @@ const onSubmit = () => {
 
 .button-container {
   height: var(--button-height);
+}
+
+.submit-button {
+  background-color: var(--color-button-bg);
+  color: var(--color-white);
+  width: 100%;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.agreement-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
 }
 
 .agreement-text {

@@ -1,39 +1,79 @@
-# zotatech
+# Zotatech
 
-This template should help get you started developing with Vue 3 in Vite.
+Проект представляет собой веб-приложение для регистрации и авторизации пользователей, разработанное с использованием Vue 3 и TypeScript.
 
-## Recommended IDE Setup
+## Технологии
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Vue 3
+- TypeScript
+- Pinia (управление состоянием)
+- Vue Router
+- Vue The Mask (маски для инпутов)
 
-## Type Support for `.vue` Imports in TS
+## Функциональность
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Регистрация пользователей с валидацией полей:
+  - Логин (обязательное поле, минимум 6 символов)
+  - Email
+  - Телефон (с маской +7 (###) ###-##-##)
+  - Пароль
+  - Подтверждение пароля
+- Адаптивный дизайн
+- Сохранение состояния авторизации
+- Защищенные маршруты
 
-## Customize configuration
+## Структура проекта
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```
+src/
+├── app/              # Инициализация приложения
+├── assets/           # Статические ресурсы
+│   └── styles/       # Стили
+├── entities/         # Бизнес-сущности
+├── features/         # Функциональные модули
+│   ├── auth/         # Авторизация
+│   └── profile/      # Профиль пользователя
+├── pages/            # Страницы приложения
+├── shared/           # Переиспользуемые компоненты
+└── types/            # TypeScript типы
+```
 
-## Project Setup
+## Установка и запуск
 
-```sh
+1. Клонируйте репозиторий
+```bash
+git clone [url-репозитория]
+```
+
+2. Установите зависимости
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
+3. Запустите проект в режиме разработки
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+4. Для сборки проекта
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Скрипты
 
-```sh
-npm run lint
-```
+- `npm run dev` - запуск в режиме разработки
+- `npm run build` - сборка проекта
+- `npm run preview` - предпросмотр собранного проекта
+- `npm run type-check` - проверка типов TypeScript
+- `npm run lint` - проверка кода линтерами
+- `npm run format` - форматирование кода
+
+## Особенности реализации
+
+- Использование Composition API
+- Типизация с помощью TypeScript
+- Адаптивный дизайн с использованием CSS-переменных
+- Валидация форм
+- Сохранение состояния в localStorage через Pinia
+- Защита маршрутов

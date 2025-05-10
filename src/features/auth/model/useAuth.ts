@@ -25,6 +25,10 @@ export const useAuth = () => {
       { validate: (value: string) => !!value, message: 'Логин обязателен' },
       { validate: (value: string) => value.length >= 6, message: 'Логин должен быть не менее 6 символов' }
     ],
+    email: [
+      { validate: (value: string) => !!value, message: 'Email обязателен' },
+      { validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), message: 'Введите корректный email' }
+    ],
     password: [
       { validate: (value: string) => !!value, message: 'Пароль обязателен' }
     ],

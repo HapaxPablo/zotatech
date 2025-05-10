@@ -77,5 +77,8 @@ const { user, logout } = useProfile()
         font-weight: 400;
         line-height: var(--button-text-line-height);
         color: var(--button-text-color);
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 </style>
