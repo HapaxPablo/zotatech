@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/entities/user/model/userStore'
 import type { IRegisterUser } from '@/entities/user/model/type'
+import { useValidation } from './useValidation'
 
 export const useAuth = () => {
   const router = useRouter()
@@ -18,52 +19,7 @@ export const useAuth = () => {
     phone: '',
   })
 
-  const errors = ref<Partial<Record<keyof typeof form.value, string>>>({})
-
-  const validationRules = {
-    login: [
-      { validate: (value: string) => !!value, message: 'Логин обязателен' },
-      { validate: (value: string) => value.length >= 6, message: 'Логин должен быть не менее 6 символов' }
-    ],
-    email: [
-      { validate: (value: string) => !!value, message: 'Email обязателен' },
-      { validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), message: 'Введите корректный email' }
-    ],
-    password: [
-      { validate: (value: string) => !!value, message: 'Пароль обязателен' }
-    ],
-    confirmPassword: [
-      { validate: (value: string) => !!value, message: 'Подтвердите пароль' },
-      { validate: (value: string) => value === form.value.password, message: 'Пароли не совпадают' }
-    ],
-    phone: [
-      { validate: (value: string) => !!value, message: 'Телефон обязателен' },
-      { 
-        validate: (value: string) => {
-          const digits = value.replace(/\D/g, '');
-          return digits.length === 11;
-        }, 
-        message: 'Введите корректный номер телефона' 
-      }
-    ]
-  }
-
-  const validate = () => {
-    errors.value = {}
-
-    Object.entries(validationRules).forEach(([field, rules]) => {
-      const value = form.value[field as keyof typeof form.value]
-      
-      for (const rule of rules) {
-        if (!rule.validate(value as string)) {
-          errors.value[field as keyof typeof errors.value] = rule.message
-          break
-        }
-      }
-    })
-
-    return Object.keys(errors.value).length === 0
-  }
+  const { errors, validate } = useValidation(form.value)
 
   const register = async () => {
     if (!validate()) return false
